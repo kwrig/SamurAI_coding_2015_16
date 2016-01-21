@@ -59,7 +59,7 @@ class DQN_class:
         # History Data :  D=[s, a, r, s_dash, end_episode_flag]
         self.D = [np.zeros((self.data_size, self.field_num * 4, self.field_size, self.field_size), dtype=np.uint8),
                   np.zeros(self.data_size, dtype=np.uint8),
-                  np.zeros((self.data_size, 1), dtype=np.int8),
+                  np.zeros((self.data_size, 1), dtype=np.float32),
                   np.zeros((self.data_size, self.field_num * 4, self.field_size, self.field_size), dtype=np.uint8),
                   np.zeros((self.data_size, 1), dtype=np.bool)]
 
