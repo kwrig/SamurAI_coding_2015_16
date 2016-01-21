@@ -9,7 +9,7 @@ import copy
 import numpy as np
 import sys
 
-from chainer import  FunctionSet, Variable, optimizers , serializers
+from chainer import  FunctionSet, Variable, optimizers , serializers , cuda
 import chainer.functions as F
 from chainer.cuda import cuda
 
