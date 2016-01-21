@@ -14,9 +14,27 @@ public class PythonBridge {
 
     Thread thread = null;
 
-    public void init(){
+    public void init(boolean isGPU) throws IOException {
         thread = new Thread(processCaller);
         thread.start();
+
+        try {
+            thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        BufferedWriter writer= processCaller.getBufferdWriter();
+
+        if(isGPU) {
+            writer.write("gpu");
+        }else {
+            writer.write("cpu");
+        }
+        writer.newLine();
+        writer.flush();
+
+
     }
 
     public int start(List<Integer> data) throws IOException {

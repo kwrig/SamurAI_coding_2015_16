@@ -117,7 +117,7 @@ public class ColordGame {
 
     void run() throws IOException {
 
-        pythonBridge.init();
+        pythonBridge.init(false);
 
         try {
             Thread.sleep(3000);
