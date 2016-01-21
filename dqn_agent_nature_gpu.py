@@ -306,7 +306,7 @@ class dqn_agent:  # RL-glue Process
 
         # Learning Phase
         if self.policyFrozen is False:  # Learning ON/OFF
-            self.DQN.stockExperience(self.time, self.last_state, self.lastAction.intArray[0], reward, self.state, False)
+            self.DQN.stockExperience(self.time, self.last_state, self.lastAction, reward, self.state, False)
             self.DQN.experienceReplay(self.time)
 
         # Target model update
