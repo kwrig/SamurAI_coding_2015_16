@@ -36,8 +36,8 @@ class DQN_class:
 
         print "Initializing DQN..."
 #	Initialization of Chainer 1.1.0 or older.
-#        print "CUDA init"
-#        cuda.init()
+        print "CUDA init"
+        cuda.init()
 
         self.field_num = field_num;
 
