@@ -222,6 +222,11 @@ class dqn_agent:  # RL-glue Process
         self.epsilon = 1.0  # Initial exploratoin rate
 
         # Pick a DQN from DQN_class
+
+        os.environ["PATH"] += ':/Developer/NVIDIA/CUDA-7.5/bin'
+
+        print os.environ["PATH"]
+
         self.DQN = DQN_class(control_size=self.control_size, field_num=self.field_num,
                              field_size=self.field_size)  # default is for "Pong".
 
@@ -351,7 +356,7 @@ class dqn_agent:  # RL-glue Process
 
 if __name__ == "__main__":
 
-    os.environ["PATH"] += '/Developer/NVIDIA/CUDA-7.5/bin'
+
 
     agent = dqn_agent()
     agent.agent_init()
