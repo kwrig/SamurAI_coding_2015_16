@@ -214,8 +214,8 @@ class dqn_agent:  # RL-glue Process
     lastAction = 0
     policyFrozen = False
 
-    field_num = 7
-    control_size = 10
+    field_num = 1
+    control_size = 12
 
     field_size = 17;
 
