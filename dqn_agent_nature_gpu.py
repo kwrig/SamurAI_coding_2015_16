@@ -210,7 +210,7 @@ class dqn_agent:  # RL-glue Process
     field_num = 1
     control_size = 12
 
-    field_size = 17;
+    field_size = 17
 
     def agent_init(self):
         # Some initializations for rlglue
@@ -260,7 +260,7 @@ class dqn_agent:  # RL-glue Process
 
         return returnAction
 
-    def agent_step(self, reward, observation):
+    def agent_step(self, observation , reward):
 
         # Preproces
         # tmp = np.bitwise_and(np.asarray(observation.intArray[128:]).reshape([210, 160]), 0b0001111)  # Get Intensity from the observation
