@@ -27,6 +27,7 @@ public class ColordGame {
     int b_x;
     int b_y;
 
+    double reward_Max = 30.0;
 
     void game_init(){
 
@@ -145,14 +146,14 @@ public class ColordGame {
                 fullTurnCount++;
 
                 System.out.println("round " +i +" action" + action + " reward = " +reward +" playerX " + a_x +"," + a_y + " Y " + b_x + "," + b_y);
-                action = pythonBridge.next(toList() ,reward);
+                action = pythonBridge.next(toList() ,reward/reward_Max);
                 reward = action(action);
                 gamePrint();
                 if(reward > 9){
                     break;
                 }
             }
-            pythonBridge.end(reward);
+            pythonBridge.end(reward/reward_Max);
             if(fullTurnCount > fullTurnMax){
                 break;
             }
