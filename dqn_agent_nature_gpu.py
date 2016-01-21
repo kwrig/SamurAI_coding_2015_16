@@ -56,7 +56,8 @@ class DQN_class:
 
         print "Initizlizing Optimizer"
         self.optimizer = optimizers.RMSpropGraves(lr=0.00025, alpha=0.95, momentum=0.95, eps=0.0001)
-        self.optimizer.setup(self.model.collect_parameters())
+        #self.optimizer.setup(self.model.collect_parameters())
+        self.optimizer.setup(self.model)
 
         # History Data :  D=[s, a, r, s_dash, end_episode_flag]
         self.D = [np.zeros((self.data_size,self.field_num * 4, self.field_size, self.field_size), dtype=np.uint8),
