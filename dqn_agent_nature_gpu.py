@@ -8,6 +8,7 @@ import copy
 
 import numpy as np
 import sys
+import os
 
 from chainer import FunctionSet, Variable, optimizers, serializers, cuda
 import chainer.functions as F
@@ -349,6 +350,9 @@ class dqn_agent:  # RL-glue Process
 
 
 if __name__ == "__main__":
+
+    os.environ["PATH"] += '/Developer/NVIDIA/CUDA-7.5/bin'
+
     agent = dqn_agent()
     agent.agent_init()
     action = 0;
