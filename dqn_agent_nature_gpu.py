@@ -95,6 +95,8 @@ class DQN_class:
         td_tmp = td.data + 1000.0 * (abs(td.data) <= 1)  # Avoid zero division
         td_clip = td * (abs(td.data) <= 1) + td / abs(td_tmp) * (abs(td.data) > 1)
 
+        print "td_data " + str(td_clip.data)
+
         zero_val = Variable(cuda.to_gpu(np.zeros((self.replay_size, self.num_of_actions), dtype=np.float32)))
         # zero_val = Variable(np.zeros((self.replay_size, self.num_of_actions), dtype=np.float32))
 

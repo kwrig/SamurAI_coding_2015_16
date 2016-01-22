@@ -11,7 +11,7 @@ import numpy as np
 import scipy.misc as spm
 import sys
 
-from chainer import FunctionSet, Variable, optimizers
+from chainer import FunctionSet, Variable, optimizers ,serializers
 import chainer.functions as F
 
 import dqn_agent_nature_gpu as gdqn
@@ -125,7 +125,7 @@ class DQN_class:
         # zero_val = Variable(cuda.to_gpu(np.zeros((self.replay_size, self.num_of_actions), dtype=np.float32)))
         zero_val = Variable(np.zeros((self.replay_size, self.num_of_actions), dtype=np.float32))
 
-        # print "td_data " + str(td_clip.data)
+        #print "td_data " + str(td_clip.data)
 
         loss = F.mean_squared_error(td_clip, zero_val)
         return loss, Q
@@ -433,13 +433,13 @@ if __name__ == "__main__":
             agent.policyFrozen = True
 
         elif n == 'save':
-            model_name = input()
-            opt_name = input()
+            model_name = raw_input()
+            opt_name = raw_input()
             agent.DQN.save_model(model_name, opt_name)
 
         elif n == 'load':
-            model_name = input()
-            opt_name = input()
+            model_name = raw_input()
+            opt_name = raw_input()
             agent.DQN.read_model(model_name, opt_name)
 
         else:
