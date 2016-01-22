@@ -129,7 +129,7 @@ public class ColordGame {
 
         int fullTurnCount = 0;
         int fullTurnMax = 1000000;
-
+        int saveTurn = 1010;
 
 
         for (int i = 0; i < 100000; i++) {
@@ -144,6 +144,13 @@ public class ColordGame {
             for (int j = 0; j < maxTurn; j++) {
 
                 fullTurnCount++;
+
+                if(fullTurnCount % saveTurn ==0){
+
+                    pythonBridge.save("test" + fullTurnCount);
+
+                }
+
 
                 System.out.println("round " +i +" action" + action + " reward = " +reward +" playerX " + a_x +"," + a_y + " Y " + b_x + "," + b_y);
                 action = pythonBridge.next(toList() ,reward/reward_Max);
@@ -161,6 +168,21 @@ public class ColordGame {
 
         pythonBridge.frozen();
 
+
+        pythonBridge.fin();
+    }
+
+    void run2() throws IOException {
+        pythonBridge.init(false);
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        pythonBridge.load("test3030");
+        pythonBridge.frozen();
         for (int i = 0; i < 10; i++) {
 
             int action = 0;
@@ -182,10 +204,9 @@ public class ColordGame {
             }
             pythonBridge.end(reward);
         }
-
-
-
         pythonBridge.fin();
+
+
     }
 
 

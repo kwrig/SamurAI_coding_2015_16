@@ -37,6 +37,44 @@ public class PythonBridge {
 
     }
 
+    public void save(String name) throws IOException {
+
+        BufferedWriter writer= processCaller.getBufferdWriter();
+        writer.write("save");
+        writer.newLine();
+        writer.flush();
+
+        writer.write(name + "_model");
+        writer.newLine();
+        writer.flush();
+
+        writer.write(name + "_load");
+        writer.newLine();
+        writer.flush();
+
+
+    }
+
+    public void load(String name) throws IOException {
+
+        BufferedWriter writer= processCaller.getBufferdWriter();
+        writer.write("load");
+        writer.newLine();
+        writer.flush();
+
+        writer.write(name + "_model");
+        writer.newLine();
+        writer.flush();
+
+        writer.write(name + "_load");
+        writer.newLine();
+        writer.flush();
+
+
+    }
+
+
+
     public int start(List<Integer> data) throws IOException {
 
         processCaller.getSerrInputStream().clear();
