@@ -349,6 +349,109 @@ public class Field {
     }
 
 
+    public List<Integer> makeFieldDataList(int samuraiNumber , int actionPoint){
+
+        Field seesField = makeOneSideField(samuraiNumber);
+        return makeFieldDataList(samuraiNumber,actionPoint,seesField);
+
+
+    }
+
+    public List<Integer> makeFieldDataList(int samuraiNumber , int actionPoint,Field seesField){
+
+        int[][][] data = new int[7][17][17];
+
+
+        /*
+         0 青赤領域
+         1 見える領域
+         2 自分の位置
+         3 味方の位置
+         4 敵の位置
+         5
+         6
+         */
+
+
+
+        //0,1
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < hight; y++) {
+
+                if(seesField.field[General.getPosition(x,y)] == samuraiNumber){
+                    data[0][x][y] = 250;
+                }else if(seesField.field[General.getPosition(x,y)] /3 == samuraiNumber/3){
+                    data[0][x][y] = 200;
+                }else if(seesField.field[General.getPosition(x,y)] /3 == 1-samuraiNumber/3){
+                    data[0][x][y] = 0;
+                }else {
+                    data[0][x][y] = 128;
+                }
+
+                if(seesField.field[General.getPosition(x,y)] == 9){
+                    data[1][x][y] = 0;
+                }else {
+                    data[1][x][y] = 250;
+                }
+            }
+        }
+
+        //2
+        int pos = seesField.players[samuraiNumber].position;
+        if(seesField.players[samuraiNumber].isHide) {
+            data[2][General.getXY(pos)[0]][General.getXY(pos)[1]] = 250;
+        }else{
+            data[2][General.getXY(pos)[0]][General.getXY(pos)[1]] = 120;
+        }
+
+        //3
+        for (int i = 0; i < 6; i++) {
+
+            if( i/3 == samuraiNumber/3 && i!=samuraiNumber){
+                pos = seesField.players[i].position;
+
+                if(seesField.players[i].isHide){
+                    data[3][General.getXY(pos)[0]][General.getXY(pos)[1]] = 120;
+                }else {
+                    data[3][General.getXY(pos)[0]][General.getXY(pos)[1]] = 250;
+                }
+            }
+        }
+
+        //4,5,6
+
+        for (int i = 0; i < 6; i++) {
+            if(i/3 != samuraiNumber/3){
+                pos = seesField.players[i].position;
+                if(!seesField.players[i].isHide){
+                    data[4+ (i%3)][General.getXY(pos)[0]][General.getXY(pos)[1]] = 250;
+                }
+            }
+        }
+
+
+        for (int i = 0; i < actionPoint; i++) {
+            data[0][16][i] = 255;
+        }
+
+        int turn = 192/3 - seesField.turn / 3 ;
+
+        for (int i = 0; i < Math.min(turn , 17); i++) {
+            data[0][i][16] = 255;
+        }
+
+        List<Integer> ret = new ArrayList<>();
+
+        for (int i = 0; i < 7; i++) {
+            for (int x = 0; x < 17; x++) {
+                for (int y = 0; y < 17; y++) {
+                    ret.add(data[i][x][y]);
+                }
+            }
+        }
+        return ret;
+    }
+
 
 
 }

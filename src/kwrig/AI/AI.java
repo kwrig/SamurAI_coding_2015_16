@@ -2,6 +2,7 @@ package kwrig.AI;
 
 import kwrig.Field;
 import kwrig.Player;
+import kwrig.Score;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public abstract class AI {
     public int samurAINumber = 0;
 
 
-    public List<Integer> action(Field field){
+    public List<Integer> action(Field field , Field ura_field , Score score){
         return new ArrayList<Integer>();
     }
 
@@ -37,6 +38,12 @@ public abstract class AI {
 
     public abstract String getName();
 
+    public abstract void EndCall(Score score);
+
+
+    public int onlyCheck(){
+        return -1;
+    }
 
 
 }

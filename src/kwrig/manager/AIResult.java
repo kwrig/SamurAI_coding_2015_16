@@ -7,11 +7,13 @@ import java.util.Comparator;
  */
 public class AIResult implements Comparator<AIResult>{
 
-    int point = 0;
+    double point = 0;
     int kill = 0;
     int death = 0;
 
     int AInumber = 0;
+
+    double attuniationRate = 0.98;
 
     public void addResult(AIResult result){
 
@@ -35,7 +37,7 @@ public class AIResult implements Comparator<AIResult>{
 
 
     public int getPoint() {
-        return point;
+        return (int)point;
     }
 
     public void setPoint(int point) {
@@ -66,9 +68,20 @@ public class AIResult implements Comparator<AIResult>{
         this.AInumber = AInumber;
     }
 
+    public void attenuation(){
+        point += attuniationRate;
+    }
+
     @Override
     public int compare(AIResult o1, AIResult o2) {
-        return o1.point - o2.point;
+        double d = o1.point - o2.point;
+        if(d > 0){
+            return 1;
+        }
+        if(d < 0){
+            return -1;
+        }
+        return 0;
     }
 
 

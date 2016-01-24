@@ -1,6 +1,7 @@
 package kwrig.AI;
 
 import kwrig.Field;
+import kwrig.Score;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class RandomNGreedy extends RandomGreedyAI {
 
 
     @Override
-    public List<Integer> action(Field field) {
+    public List<Integer> action(Field field, Field ura_field, Score score) {
 
 
         Field buf = new Field(field);

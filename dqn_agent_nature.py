@@ -247,8 +247,8 @@ class dqn_agent:  # RL-glue Process
     lastAction = 0
     policyFrozen = False
 
-    field_num = 1
-    control_size = 12
+    field_num = 7
+    control_size = 11
 
     field_size = 17
 
@@ -272,7 +272,7 @@ class dqn_agent:  # RL-glue Process
         # obs_array = (spm.imresize(tmp, (110, 84)))[110-84-8:110-8, :]  # Scaling
 
         tmp = np.array(observation)
-        obs_array = tmp.reshape(self.field_size, self.field_size, self.field_num)
+        obs_array = tmp.reshape( self.field_num,self.field_size, self.field_size)
 
         # Initialize State
         self.state = np.zeros((self.field_num * 4, self.field_size, self.field_size), dtype=np.uint8)
@@ -305,7 +305,7 @@ class dqn_agent:  # RL-glue Process
 
 
         tmp = np.array(observation)
-        obs_array = tmp.reshape(self.field_size, self.field_size, self.field_num)
+        obs_array = tmp.reshape(self.field_num,self.field_size, self.field_size)
 
         # Compose State : 4-step sequential observation
         next_state = np.zeros((self.field_num * 4, self.field_size, self.field_size), dtype=np.uint8);

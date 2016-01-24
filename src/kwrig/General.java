@@ -10,7 +10,7 @@ public class General {
 
     public final static int[] ORDER = {0,3,4,1,2,5,3,0,1,4,5,2};
 
-    public final static int[] COST = {0,4,4,4,4,2,2,2,2,1,1,999};
+    public final static int[] COST = {999,4,4,4,4,2,2,2,2,1,1,999};
 
     public final static int[] MOVE_X = {0,1,0,-1};
     public final static int[] MOVE_Y = {1,0,-1,0};

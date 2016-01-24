@@ -1,6 +1,7 @@
 package kwrig.manager;
 
 import kwrig.AI.AI;
+import kwrig.AI.PythonAI;
 import kwrig.AI.RandomGreedyAI;
 import kwrig.Field;
 import kwrig.General;
@@ -96,15 +97,22 @@ public class SingleGameManager implements Runnable{
 
         Field field = new Field();
 
-        for (int i = 0; i < 6; i++) {
+        AI ai = new PythonAI();
 
-            AI ai = new RandomGreedyAI();
+        aiList.add(ai);
+        Player player = new Player();
+        player.homePosition = General.getPosition(General.FIRST_PLACE[0][0] ,General.FIRST_PLACE[0][1] );
+        player.position = player.homePosition;
+        player.samuraiNumber = 0;
+
+        field.players[0] = player;
 
 
+        for (int i = 1; i < 6; i++) {
+
+            ai = new RandomGreedyAI();
             aiList.add(ai);
-
-
-            Player player = new Player();
+            player = new Player();
             player.homePosition = General.getPosition(General.FIRST_PLACE[i][0] ,General.FIRST_PLACE[i][1] );
             player.position = player.homePosition;
             player.samuraiNumber = i;
@@ -116,6 +124,8 @@ public class SingleGameManager implements Runnable{
         Game game = new Game(field , aiList);
 
         game.start();
+
+        PythonAI.fin();
 
 
 

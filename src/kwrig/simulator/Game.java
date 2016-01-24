@@ -57,8 +57,10 @@ public class Game {
                 Field nextField = new Field(fields.get(fields.size()-1));
 
 
+                score = nextField.score;
+                score.calcScore(nextField);
 
-                List<Integer> action = aiList.get(General.ORDER[j]).action(nextField.makeOneSideField(General.ORDER[j]));
+                List<Integer> action = aiList.get(General.ORDER[j]).action(nextField.makeOneSideField(General.ORDER[j]),nextField , score);
                 nextField.act(action , General.ORDER[j]);
 
                 nextField.nextTurn();
@@ -80,6 +82,11 @@ public class Game {
         }
         score = fields.get(fields.size()-1).score;
         score.calcScore(fields.get(fields.size()-1));
+        for (int i = 0; i < 6; i++) {
+            aiList.get(i).EndCall(score);
+        }
+
+
 
 
     }

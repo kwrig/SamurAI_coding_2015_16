@@ -4,9 +4,7 @@ import kwrig.AI.AI;
 import kwrig.Field;
 import kwrig.Score;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by kwrig on 2016/01/07.
@@ -38,11 +36,15 @@ public class MultiGameManager {
         List<SingleGameManager> singleGameManagerList = new ArrayList<SingleGameManager>();
 
 
+
         for(AIResult aiResult : sortResult){
 
             aiList.add(samurailist.get(aiResult.getAInumber()));
 
             if(aiList.size() == 6){
+
+
+
 
                 SingleGameManager singleGameManager = new SingleGameManager();
                 singleGameManager.aiList = new ArrayList<AI>(aiList);
@@ -72,6 +74,7 @@ public class MultiGameManager {
             System.out.println(results.toString());
 
             for (AIResult airesult:results){
+                airesult.attenuation();
                 result.addAIResult(airesult);
             }
         }

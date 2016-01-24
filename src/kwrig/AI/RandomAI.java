@@ -2,6 +2,7 @@ package kwrig.AI;
 
 import kwrig.Field;
 import kwrig.General;
+import kwrig.Score;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,15 @@ import java.util.List;
 public class RandomAI extends AI {
 
 
+
+
+
     @Override
-    public List<Integer> action(Field field) {
-
-
+    public List<Integer> action(Field field, Field ura_field, Score score) {
         return getRandomAct();
     }
+
+
 
     public List<Integer> getRandomAct(){
         List<Integer> ret = new ArrayList<Integer>();
@@ -41,5 +45,10 @@ public class RandomAI extends AI {
     @Override
     public String getName() {
         return "RandomAI";
+    }
+
+    @Override
+    public void EndCall(Score score) {
+
     }
 }
