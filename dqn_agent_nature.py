@@ -252,7 +252,7 @@ class dqn_agent:  # RL-glue Process
 
     field_size = 17
 
-    dist_epsilon = 1.1 / 10 ** 5
+    dist_epsilon = 1.0 / 10 ** 5
 
     def agent_init(self):
         # Some initializations for rlglue
@@ -398,10 +398,20 @@ if __name__ == "__main__":
 
     if ss == 'gpu':
         agent = gdqn.dqn_agent()
-        agent.agent_init()
     elif ss == 'cpu':
         agent = dqn_agent()
-        agent.agent_init()
+
+
+    sss = input();
+    agent.control_size = sss;
+
+    sss = input();
+    agent.field_num = sss;
+
+    agent.agent_init()
+
+
+
 
     action = 0;
 

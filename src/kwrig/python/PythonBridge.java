@@ -14,7 +14,7 @@ public class PythonBridge {
 
     Thread thread = null;
 
-    public void init(boolean isGPU) throws IOException {
+    public void init(boolean isGPU , int actionNumber , int fieldNum) throws IOException {
         thread = new Thread(processCaller);
         thread.start();
 
@@ -33,6 +33,14 @@ public class PythonBridge {
         }
         writer.newLine();
         writer.flush();
+
+        writer.write(Integer.toString(actionNumber));
+        writer.newLine();
+
+        writer.write(Integer.toString(fieldNum));
+        writer.newLine();
+        writer.flush();
+
 
 
     }

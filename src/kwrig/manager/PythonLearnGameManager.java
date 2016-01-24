@@ -87,14 +87,10 @@ public class PythonLearnGameManager {
         }
 
 
-
-
         System.out.println("playerPoint = " + Sum(playerPointList));
         System.out.println("playerKill = " + Sum(playerkillList));
         System.out.println("playerDeath = " + Sum(playerDeathList));
         System.out.println("playerWin = " + Sum(playerWinList));
-
-
 
     }
 
@@ -109,8 +105,15 @@ public class PythonLearnGameManager {
         pythonSamuraiNumber = Integer.parseInt(s);    // 整数に変換
 
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000000; i++) {
             singleGame();
+
+            System.out.println("round" + i + " end");
+
+            if(i%100 == 999){
+                PythonAI.pythonBridge.save("battle" + (i+1) +"samurai" + pythonSamuraiNumber);
+            }
+
         }
 
         PythonAI.fin();

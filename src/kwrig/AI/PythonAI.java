@@ -16,7 +16,7 @@ public class PythonAI extends AI {
 
     static boolean initFlag = true;
 
-    static PythonBridge pythonBridge = new PythonBridge();
+    public static PythonBridge pythonBridge = new PythonBridge();
 
     public int onlyNumber = 0;
 
@@ -24,7 +24,7 @@ public class PythonAI extends AI {
 
         if (initFlag) {
             try {
-                pythonBridge.init(false);
+                pythonBridge.init(true , 11,7);
             } catch (IOException e) {
                 e.printStackTrace();
 

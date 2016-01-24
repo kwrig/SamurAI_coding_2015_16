@@ -17,10 +17,10 @@ import chainer.functions as F
 class DQN_class:
     # Hyper-Parameters
     gamma = 0.99  # Discount factor
-    initial_exploration = 100  # 10**4  # Initial exploratoin. original: 5x10^4
+    initial_exploration = 50000  # 10**4  # Initial exploratoin. original: 5x10^4
     replay_size = 32  # Replay (batch) size
     target_model_update_freq = 10 ** 4  # Target update frequancy. original: 10^4
-    data_size = 10 ** 5  # Data size of history. original: 10^6
+    data_size = 5 * (10 ** 5)  # Data size of history. original: 10^6
 
     field_num = 7
     field_size = 17
@@ -209,7 +209,7 @@ class dqn_agent:  # RL-glue Process
     lastAction = 0
     policyFrozen = False
 
-    field_num = 1
+    field_num = 7
     control_size = 12
 
     field_size = 17
@@ -237,7 +237,7 @@ class dqn_agent:  # RL-glue Process
         # obs_array = (spm.imresize(tmp, (110, 84)))[110-84-8:110-8, :]  # Scaling
 
         tmp = np.array(observation)
-        obs_array = tmp.reshape(self.field_size, self.field_size, self.field_num)
+        obs_array = tmp.reshape(self.field_num,self.field_size, self.field_size)
 
         # Initialize State
         self.state = np.zeros((self.field_num * 4, self.field_size, self.field_size), dtype=np.uint8)
@@ -271,7 +271,7 @@ class dqn_agent:  # RL-glue Process
 
 
         tmp = np.array(observation)
-        obs_array = tmp.reshape(self.field_size, self.field_size, self.field_num)
+        obs_array = tmp.reshape(self.field_num,self.field_size, self.field_size)
 
         # Compose State : 4-step sequential observation
         next_state = np.zeros((self.field_num * 4, self.field_size, self.field_size), dtype=np.uint8);
@@ -291,7 +291,7 @@ class dqn_agent:  # RL-glue Process
         # Exploration decays along the time sequence
         if self.policyFrozen is False:  # Learning ON/OFF
             if self.DQN.initial_exploration < self.time:
-                self.epsilon -= 1.0 / 10 ** 6
+                self.epsilon -= 0.5 / 10 ** 6
                 if self.epsilon < 0.1:
                     self.epsilon = 0.1
                 eps = self.epsilon

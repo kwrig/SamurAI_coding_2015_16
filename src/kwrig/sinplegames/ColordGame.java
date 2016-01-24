@@ -118,7 +118,7 @@ public class ColordGame {
 
     void run() throws IOException {
 
-        pythonBridge.init(false);
+        pythonBridge.init(true , 12,1);
 
         try {
             Thread.sleep(3000);
@@ -128,11 +128,11 @@ public class ColordGame {
         System.out.println("gameStart");
 
         int fullTurnCount = 0;
-        int fullTurnMax = 1000000;
-        int saveTurn = 1010;
+        int fullTurnMax = 10000000;
+        int saveTurn = 10000;
 
 
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 100000000; i++) {
 
             int action = 0;
 
@@ -173,7 +173,7 @@ public class ColordGame {
     }
 
     void run2() throws IOException {
-        pythonBridge.init(false);
+        pythonBridge.init(true , 12,1);
 
         try {
             Thread.sleep(3000);

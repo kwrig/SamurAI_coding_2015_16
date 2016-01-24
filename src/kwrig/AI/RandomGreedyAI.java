@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class RandomGreedyAI extends RandomAI {
 
-    int simNumber = 1000;
+    int simNumber = 2000;
 
     @Override
     public List<Integer> action(Field field, Field ura_field, Score score) {
