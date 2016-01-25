@@ -110,7 +110,7 @@ public class PythonLearnGameManager {
 
             System.out.println("round" + i + " end");
 
-            if(i%100 == 999){
+            if(i%1000 == 999){
                 PythonAI.pythonBridge.save("battle" + (i+1) +"samurai" + pythonSamuraiNumber);
             }
 
