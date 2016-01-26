@@ -125,10 +125,9 @@ public class PythonLearnGameManager {
         PythonLearnGameManager manager = new PythonLearnGameManager();
         manager.run();
 
-
     }
 
-    int Sum(List<Integer> list){
+    public static int Sum(List<Integer> list){
 
         int ret = 0;
 

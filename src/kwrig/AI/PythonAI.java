@@ -114,6 +114,27 @@ public class PythonAI extends AI {
         }
     }
 
+    static public void laod(String name){
+
+        PythonBridge pb = new PythonBridge();
+        try {
+            pb.load(name);
+            pythonBridge = pb;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    static public void frozen(){
+        try {
+            pythonBridge.frozen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @Override
     public int onlyCheck() {
         return onlyNumber;
