@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class PythonAI extends AI {
 
-    static boolean initFlag = true;
+    public static boolean initFlag = true;
 
     public static PythonBridge pythonBridge = new PythonBridge();
 
@@ -118,6 +118,7 @@ public class PythonAI extends AI {
 
         PythonBridge pb = new PythonBridge();
         try {
+            pb.init(true , 11,7);
             pb.load(name);
             pythonBridge = pb;
         } catch (IOException e) {
@@ -128,6 +129,7 @@ public class PythonAI extends AI {
 
     static public void frozen(){
         try {
+            System.err.println("Frozen");
             pythonBridge.frozen();
         } catch (IOException e) {
             e.printStackTrace();
