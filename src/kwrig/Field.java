@@ -56,6 +56,11 @@ public class Field {
 
     public Field() {
 
+        for (int i = 0; i < 6; i++) {
+            players[i] = new Player();
+        }
+
+
     }
 
     public Field(Field f) {
@@ -66,14 +71,17 @@ public class Field {
 
         turn = f.turn;
 
-        for (int i = 0; i < f.players.length; i++) {
+
+        for (int i = 0; i < 6; i++) {
             Player player = new Player(f.players[i]);
             players[i] = player;
+            //players[i].copy(f.players[i]);
         }
+
 
         field = Arrays.copyOf(f.field, f.field.length);
 
-        score = new Score(f.score);
+        score.copy(f.score);
 
     }
 
@@ -140,30 +148,35 @@ public class Field {
 
     }
 
-    public void act(List<Integer> action, int actPlayer){
+    public boolean act(List<Integer> action, int actPlayer){
 
         int costSum = 0;
 
         if(players[actPlayer].health > 0){
-            return;
+            return false;
         }
 
 
         if (action==null){
-            return;
+            return false;
         }
 
         for (Integer act :action){
 
+            if(act==0){
+                break;
+            }
+
             costSum += General.COST[act];
             if(costSum > 7){
-                return;
+                return false;
             }
 
             if(act(act,actPlayer) == false){
-                return;
+                return false;
             }
         }
+        return true;
     }
 
 
@@ -201,6 +214,12 @@ public class Field {
                 if (player.isHide == true || field[player.position] / 3 != actionPlayer / 3) {
                     return false;
                 }
+
+                for (int i = 0; i < 6; i++) {
+                    if(players[i].homePosition == player.position){
+                        return false;
+                    }
+                }
                 players[actionPlayer].isHide = true;
                 break;
             case 10:
@@ -216,9 +235,10 @@ public class Field {
                     if (players[i].position == player.position) {
                         return false;
                     }
-                    player.isHide = false;
 
                 }
+                player.isHide = false;
+
                 break;
             default:
                 return false;
@@ -326,8 +346,6 @@ public class Field {
                 }else{
                     ret += " ";
                 }
-
-
             }
             ret += crlf;
         }

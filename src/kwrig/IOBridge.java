@@ -1,11 +1,12 @@
 package kwrig;
 
 import kwrig.AI.AI;
-import kwrig.AI.NeoRandomNGreedy;
+import kwrig.AI.NeoEnemyEstimate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  * Created by kwrig on 2016/01/09.
@@ -17,8 +18,13 @@ public class IOBridge {
 
     Field field = new Field();
 
-    AI ai = new NeoRandomNGreedy(1);
+   // AI ai = new EnemyDodgeAI(2);
+    //AI ai = new EnemyEstimateAndAttack(2,true,3);
+    AI ai = new NeoEnemyEstimate(2,3,false);
 
+    General general = new General();
+
+    int team = 0;
 
     void initRead() throws IOException {
 
@@ -29,7 +35,9 @@ public class IOBridge {
         String[] splits = string.split(" ");
         field.maxTurn = Integer.parseInt(splits[0]);
 
-        int mySamuraiNumber = Integer.parseInt(splits[1]) * 3 + Integer.parseInt(splits[2]);
+        team = Integer.parseInt(splits[1]);
+        //int mySamuraiNumber = Integer.parseInt(splits[1]) * 3 + Integer.parseInt(splits[2]);
+        int mySamuraiNumber = Integer.parseInt(splits[2]) + team*3;
         field.width = Integer.parseInt(splits[3]);
         field.hight = Integer.parseInt(splits[4]);
         field.healthTime = Integer.parseInt(splits[5]);
@@ -40,6 +48,7 @@ public class IOBridge {
 
         for (int i = 0; i < 6; i++) {
 
+            int samurai = (i +team*3)%6;
             string = readNext();
             splits = string.split(" ");
 
@@ -48,10 +57,9 @@ public class IOBridge {
             int pos = General.getPosition( Integer.parseInt(splits[0]) , Integer.parseInt(splits[1]) );
             player.position = pos;
             player.homePosition = pos;
-            player.samuraiNumber = i;
+            player.samuraiNumber = samurai;
 
-
-            field.players[i] = player;
+            field.players[samurai] = player;
         }
 
         for (int i = 0; i < 6; i++) {
@@ -59,6 +67,8 @@ public class IOBridge {
         }
 
         ai.init(field , field.players[mySamuraiNumber]);
+
+        field.init();
 
         System.out.println("# end init");
 
@@ -74,10 +84,6 @@ public class IOBridge {
         }
 
         return string;
-
-
-
-
     }
 
 
@@ -103,9 +109,11 @@ public class IOBridge {
         for (int i = 0; i < 6; ++i){
             res = this.read();
 
-            Player player = new Player(field.players[i]);
+            int samurai = (i +team*3)%6;
+
+            Player player = new Player(field.players[samurai]);
             int x = Integer.parseInt(res[0]);
-            int y = Integer.parseInt(res[0]);
+            int y = Integer.parseInt(res[1]);
 
             if(General.isRangeX(x) && General.isRangeY(y)){
                 player.position = General.getPosition(x,y);
@@ -120,6 +128,7 @@ public class IOBridge {
             }else {
                 player.isHide=true;
             }
+            nextField.players[samurai] = player;
         }
 
         for (int i = 0; i < nextField.hight; i++) {
@@ -128,8 +137,20 @@ public class IOBridge {
 
             String[] splits = string.split(" ");
 
+            int nnnn = 0;
             for (int j = 0; j < nextField.width; j++) {
-                nextField.setField(Integer.parseInt(splits[j]) , i,j);
+
+                if(isNumber(splits[j+nnnn])) {
+
+                    int ff = Integer.parseInt(splits[j+nnnn]);
+                    if(ff < 6) {
+                        ff = (Integer.parseInt(splits[j + nnnn]) + team * 3) % 6;
+                    }
+                    nextField.setField(ff, j, i);
+                }else{
+                    nnnn++;
+                    j--;
+                }
             }
         }
 
@@ -140,20 +161,26 @@ public class IOBridge {
 
     void action() throws IOException {
 
-        /*
-        List<Integer> act = ai.action(field);
+
+        List<Integer> act = ai.action(field,null,null);
 
         String prints = "";
 
-        for(Integer i:act){
-            prints += i + " ";
-        }
-        prints += "0";
+         boolean start = true;
 
+        for(Integer i:act){
+
+            if(start){
+                start = false;
+            }else{
+                prints+=" ";
+            }
+
+            prints += i;
+        }
+       // System.err.println(prints);
         System.out.println(prints);
-        */
-        System.out.println("0");
-        System.out.flush();
+
 
 
     }
@@ -161,6 +188,7 @@ public class IOBridge {
     void run() throws IOException {
 
         initRead();
+
 
         System.out.println("# print0");
 
@@ -173,6 +201,7 @@ public class IOBridge {
 
 
             field = readTurnInfo();
+          //  System.err.println(field.toString());
 
             action();
 
@@ -206,5 +235,14 @@ public class IOBridge {
         return line.split("\\s");
     }
 
+
+    public boolean isNumber(String val) {
+        try {
+            Integer.parseInt(val);
+            return true;
+        } catch (NumberFormatException nfex) {
+            return false;
+        }
+    }
 
 }

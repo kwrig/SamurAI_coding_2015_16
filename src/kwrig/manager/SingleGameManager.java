@@ -1,7 +1,7 @@
 package kwrig.manager;
 
 import kwrig.AI.AI;
-import kwrig.AI.PythonAI;
+import kwrig.AI.ActionListGreedyAI;
 import kwrig.AI.RandomGreedyAI;
 import kwrig.Field;
 import kwrig.General;
@@ -97,7 +97,7 @@ public class SingleGameManager implements Runnable{
 
         Field field = new Field();
 
-        AI ai = new PythonAI();
+        AI ai = new ActionListGreedyAI(2);
 
         aiList.add(ai);
         Player player = new Player();
@@ -125,7 +125,7 @@ public class SingleGameManager implements Runnable{
 
         game.start();
 
-        PythonAI.fin();
+       // PythonAI.fin();
 
 
 

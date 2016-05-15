@@ -24,7 +24,7 @@ public class Player {
     public Player() {
     }
 
-    Player(Player player) {
+    public Player(Player player) {
         copy(player);
 
     }
@@ -71,12 +71,12 @@ public class Player {
                 continue;
             }
             if(player.position == General.getPosition(x,y)){
-
                 if(player.isHide==false && isHide==false) {
                     return false;
                 }
-
-
+            }
+            if(player.homePosition == General.getPosition(x,y)){
+                return false;
             }
 
 

@@ -28,11 +28,14 @@ public class RandomAI extends AI {
 
         int cost = 0;
 
-        while (cost < 7){
+        while (true){
 
             int move = (int)(Math.random() * 10) + 1;
 
             cost += General.COST[move];
+            if(cost > 7){
+                break;
+            }
             ret.add(move);
         }
 

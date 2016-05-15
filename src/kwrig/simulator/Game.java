@@ -66,6 +66,7 @@ public class Game {
                 nextField.nextTurn();
 
                 /*
+
                 System.out.println(action.toString());
 
                 System.out.println("field");
@@ -74,7 +75,7 @@ public class Game {
                 System.out.println("user");
                 System.out.println(nextField.makeOneSideField(General.ORDER[j]).toString());
 
-                   */
+*/
 
                 fields.add(nextField);
 

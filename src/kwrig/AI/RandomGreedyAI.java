@@ -55,7 +55,6 @@ public class RandomGreedyAI extends RandomAI {
             if(f.field[i] == samurAINumber){
                 ret++;
             }
-
         }
         return ret;
     }

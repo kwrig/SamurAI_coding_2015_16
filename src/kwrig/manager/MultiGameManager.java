@@ -11,20 +11,18 @@ import java.util.*;
  */
 public class MultiGameManager {
 
-    int section_total = 500;
+    int section_total = 100;
 
 
     TournamentResult result = new TournamentResult();
 
 
-
-    
     void run_OneSection() throws InterruptedException {
 
         TournamentResult sortResult = new TournamentResult(result);
 
         Collections.shuffle(sortResult);
-        Collections.sort(sortResult , new AIResult());
+        Collections.sort(sortResult, new AIResult());
         Collections.reverse(sortResult);
 
         List<AI> aiList = new ArrayList<AI>();
@@ -36,15 +34,11 @@ public class MultiGameManager {
         List<SingleGameManager> singleGameManagerList = new ArrayList<SingleGameManager>();
 
 
-
-        for(AIResult aiResult : sortResult){
+        for (AIResult aiResult : sortResult) {
 
             aiList.add(samurailist.get(aiResult.getAInumber()));
 
-            if(aiList.size() == 6){
-
-
-
+            if (aiList.size() == 6) {
 
                 SingleGameManager singleGameManager = new SingleGameManager();
                 singleGameManager.aiList = new ArrayList<AI>(aiList);
@@ -56,24 +50,22 @@ public class MultiGameManager {
                 threadList.add(thread);
 
 
-
-
                 aiList.clear();
             }
         }
 
-        for (Thread thread:threadList){
+        for (Thread thread : threadList) {
             thread.join();
         }
 
-        for (SingleGameManager manager:singleGameManagerList){
+        for (SingleGameManager manager : singleGameManagerList) {
 
             Score score = manager.getScore();
 
             List<AIResult> results = score.getAIResults();
             System.out.println(results.toString());
 
-            for (AIResult airesult:results){
+            for (AIResult airesult : results) {
                 airesult.attenuation();
                 result.addAIResult(airesult);
             }
@@ -84,18 +76,18 @@ public class MultiGameManager {
     }
 
 
-    void run() throws InterruptedException {
+    TournamentResult run() throws InterruptedException {
 
         System.out.println(result.toString());
 
 
         for (int i = 0; i < section_total; i++) {
-            System.out.println(i +" th round");
+            System.out.println(i + " th round");
             run_OneSection();
-
-
         }
-        
+
+        return result;
+
 
     }
 

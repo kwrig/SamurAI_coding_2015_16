@@ -1,6 +1,7 @@
 package kwrig.AI;
 
 import kwrig.Field;
+import kwrig.General;
 import kwrig.Player;
 import kwrig.Score;
 
@@ -45,5 +46,8 @@ public abstract class AI {
         return -1;
     }
 
+    public AI(){
+        General general = new General();
+    }
 
 }
